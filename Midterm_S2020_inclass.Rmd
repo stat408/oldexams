@@ -1,0 +1,124 @@
+---
+title: |
+    | STAT 408: Midterm Exam
+    | Name:
+output: pdf_document 
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+library(tibble)
+library(dplyr)
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+There are a total of 8 question. You only need to answer 7 of them. Put an __X__ through the question you don't want graded. If you answer all of the questions, Q8 will not be graded.
+
+### Code interpretation
+For questions 1 - 3 use the following data frame (called `snow`) and interpret the code. For full credit (and partial credit), write what the code will return along with justification for your answer.
+
+```{r, eval = T, echo = F}
+snow <- tibble(ski_hill = c('Big Sky','Jackson Hole','Taos','Bridger Bowl','Loveland', "Vail", "Park City"),
+               pass = c('Ikon','Ikon','Ikon','Powder Alliance','Powder Alliance', "Epic","Epic"),
+       acres = c(5800, 2500,1294, 2000, 1800, 5317,7300),
+       vertical = c(4336, 4139,3281, 2600, 2210,3450,3226 ))
+snow %>% arrange(pass) %>% kable()
+```
+
+## 1. (4 points)
+
+```{r}
+library(tidyverse)
+snow %>% group_by(pass) %>% summarize(min_size = min(acres)) %>% arrange(min_size)
+```
+
+\vfill
+
+## 2. (4 points)
+```{r}
+for (i in 1:5){
+  print(snow$ski_hill[i])
+    if (snow$pass[i] == 'Ikon'){
+      print("is on the Ikon pass")
+    } else {
+      print("is not on the Ikon pass")
+    }
+}
+```
+
+\vfill
+
+\newpage
+
+## 3. (4 points)
+```{r}
+snow %>% ggplot(aes(y = vertical, x = acres, shape = pass)) +
+  geom_point() + ggtitle('Vertical vs. Skiable Acres')
+```
+
+\vfill
+\vfill
+\vfill
+\vfill
+## 4. (4 points)
+```{r}
+ifelse(snow[,3] > 5000 | snow[,4] > 4000, 
+       "The mountain is big or steep",
+       "The mountain is not big or steep")
+```
+
+\vfill
+\vfill
+\newpage
+For questions 5 and 6 use the `snow` data frame and the `ticket_price` data frame (below).
+```{r, eval = T, echo = F}
+ticket_price <- tibble(ski_hill = c('Big Sky','Bridger Bowl','Discovery'),
+               pass_cost = c('1,699', '900', '525'))
+ticket_price %>% kable()
+```
+
+## 5. (4 points)
+```{r}
+snow %>% inner_join(ticket_price, by = "ski_hill")
+```
+\vfill
+
+## 6. (4 points)
+
+```{r}
+library(stringr)
+ticket_price %>% mutate(cost = str_replace(pass_cost, ',', ''))
+```
+\vfill
+
+
+\newpage
+
+## 7. (4 points)
+Describe at least two principles of good data visualization and include a sketch to demonstrate - you will not be graded on your artistic ability, but keep it neat.
+
+\vfill
+
+## 8. (4 points)
+Finish the function. Either code or prose is acceptable.
+```{r}
+flip_coin <- function(num_flips){
+  # Function to simulate flipping a fair coin
+  # ARGS: num_flips - number of times to flip coin
+  # RETURNS: vector of coin flips containing "H" or "T"
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+}
+```
+
+
+
+
